@@ -105,22 +105,24 @@ const PricingSection = () => {
                   {plan.name}
                 </h3>
 
-                <div className="mb-4">
-                  <span
-                    className="text-4xl font-bold"
-                    style={{ color: "hsl(var(--accent-amber))" }}
-                  >
-                    {plan.price}
-                  </span>
-                  {plan.period && (
+                {plan.price && (
+                  <div className="mb-4">
                     <span
-                      className="ml-2 rtl:mr-2 rtl:ml-0"
-                      style={{ color: "hsl(var(--text-tertiary))" }}
+                      className="text-4xl font-bold"
+                      style={{ color: "hsl(var(--accent-amber))" }}
                     >
-                      {plan.period}
+                      {plan.price}
                     </span>
-                  )}
-                </div>
+                    {plan.period && (
+                      <span
+                        className="ml-2 rtl:mr-2 rtl:ml-0"
+                        style={{ color: "hsl(var(--text-tertiary))" }}
+                      >
+                        {plan.period}
+                      </span>
+                    )}
+                  </div>
+                )}
 
                 <p
                   className="mb-6"
