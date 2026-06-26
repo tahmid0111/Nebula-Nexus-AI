@@ -187,7 +187,7 @@ const translations: Record<string, string> = {
   "pricing.plan1.description": "We train your team to build AI automations themselves — in 7 days.",
   "pricing.plan1.feature1": "8 hands-on modules across 7 working days",
   "pricing.plan1.feature2": "Full prompt engineering curriculum",
-  "pricing.plan1.feature3": "Your team ships 3 real automations by Day 7",
+  "pricing.plan1.feature3": "Your team will build 3 assistants and graduate by Day 7",
   "pricing.plan1.feature4": "No retainer, no ongoing fees — you own everything",
   "pricing.plan1.feature5": "Internal capability that compounds long after we leave",
   "pricing.plan2.name": "Built Automations",
@@ -230,7 +230,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const t = (key: string): string => {
-    return translations[key] || key;
+    return translations[key] ?? key;
   };
 
   return (

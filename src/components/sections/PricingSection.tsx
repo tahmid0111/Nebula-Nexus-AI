@@ -45,6 +45,22 @@ const PricingSection = () => {
       className="relative section-padding overflow-hidden"
       style={{ backgroundColor: "hsl(var(--bg-primary))" }}
     >
+      {/* Ambient glow orbs */}
+      <div
+        className="landing-pulse pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[42rem] h-[42rem] rounded-full blur-3xl opacity-60"
+        style={{
+          background:
+            "radial-gradient(circle at center, hsl(var(--accent-amber) / 0.22), transparent 65%)",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute bottom-0 right-0 w-[28rem] h-[28rem] rounded-full blur-3xl opacity-50"
+        style={{
+          background:
+            "radial-gradient(circle at center, hsl(210 100% 55% / 0.16), transparent 70%)",
+        }}
+      />
+
       <div className="container-custom relative z-10">
         <SectionHeading
           badge={t("pricing.badge")}
@@ -52,52 +68,64 @@ const PricingSection = () => {
           subtitle={t("pricing.subtitle")}
         />
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-16">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto mt-16">
           {plans.map((plan, index) => (
             <motion.div
               key={plan.name}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-              whileHover={{ y: -6 }}
+              transition={{ duration: 0.5, delay: index * 0.15 }}
+              whileHover={{ y: -8 }}
               className="relative pt-5"
             >
+              {/* Glow ring — stronger for the recommended tier */}
+              <div
+                className={`pointer-events-none absolute -inset-px rounded-[1.75rem] ${
+                  plan.popular ? "landing-pulse" : ""
+                }`}
+                style={{
+                  background: plan.popular
+                    ? "linear-gradient(140deg, hsl(var(--accent-amber) / 0.9), transparent 45%, hsl(210 100% 55% / 0.6))"
+                    : "linear-gradient(140deg, hsl(var(--border-soft)), transparent 60%)",
+                }}
+              />
+
               {plan.popular && (
-                <>
-                  {/* Pulsing accent glow behind recommended tier */}
-                  <div
-                    className="landing-pulse pointer-events-none absolute inset-0 -z-10 rounded-3xl blur-2xl"
-                    style={{
-                      background:
-                        "radial-gradient(ellipse at center, hsl(var(--accent-amber) / 0.55), transparent 70%)",
-                    }}
-                  />
-                  <span
-                    className="absolute -top-3 left-1/2 -translate-x-1/2 z-10 px-4 py-1.5 text-xs font-semibold rounded-full flex items-center gap-1 whitespace-nowrap shadow-lg"
-                    style={{
-                      backgroundColor: "hsl(var(--accent-amber))",
-                      color: "hsl(240 45% 6%)",
-                    }}
-                  >
-                    <ShieldCheck className="w-3 h-3 shrink-0" />
-                    {t("pricing.startHere")}
-                  </span>
-                </>
+                <span
+                  className="absolute -top-1 left-1/2 -translate-x-1/2 z-20 px-4 py-1.5 text-xs font-semibold rounded-full flex items-center gap-1.5 whitespace-nowrap"
+                  style={{
+                    backgroundColor: "hsl(var(--accent-amber))",
+                    color: "hsl(240 45% 6%)",
+                    boxShadow: "0 8px 30px -6px hsl(var(--accent-amber) / 0.7)",
+                  }}
+                >
+                  <ShieldCheck className="w-3 h-3 shrink-0" />
+                  {t("pricing.startHere")}
+                </span>
               )}
 
               <div
-                className="group relative h-full rounded-2xl p-8 transition-all duration-300"
+                className="group relative h-full rounded-[1.7rem] p-8 backdrop-blur-xl transition-all duration-300"
                 style={{
-                  backgroundColor: "hsl(var(--bg-secondary))",
-                  border: plan.popular
-                    ? "1px solid hsl(var(--accent-amber) / 0.85)"
-                    : "1px solid hsl(var(--border-soft))",
+                  backgroundColor: plan.popular
+                    ? "hsl(var(--bg-secondary) / 0.85)"
+                    : "hsl(var(--bg-secondary) / 0.7)",
                   boxShadow: plan.popular
-                    ? "0 24px 80px -25px hsl(var(--accent-amber) / 0.55), inset 0 1px 0 hsl(var(--accent-amber) / 0.15)"
-                    : "0 8px 40px -15px hsl(var(--accent-amber) / 0.12)",
+                    ? "0 30px 90px -30px hsl(var(--accent-amber) / 0.6), inset 0 1px 0 hsl(var(--accent-amber) / 0.18)"
+                    : "0 20px 60px -30px hsl(240 45% 0% / 0.6), inset 0 1px 0 hsl(0 0% 100% / 0.04)",
                 }}
               >
+                {/* Glowing accent line at the top of the card */}
+                <div
+                  className="absolute top-0 left-1/2 -translate-x-1/2 h-px w-2/3"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, transparent, hsl(var(--accent-amber) / 0.9), transparent)",
+                    opacity: plan.popular ? 1 : 0.4,
+                  }}
+                />
+
                 <h3
                   className="text-2xl font-bold mb-2"
                   style={{ color: "hsl(var(--text-primary))" }}
@@ -108,8 +136,7 @@ const PricingSection = () => {
                 {plan.price && (
                   <div className="mb-4">
                     <span
-                      className="text-4xl font-bold"
-                      style={{ color: "hsl(var(--accent-amber))" }}
+                      className="text-4xl font-bold gradient-text"
                     >
                       {plan.price}
                     </span>
@@ -142,6 +169,7 @@ const PricingSection = () => {
                         className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
                         style={{
                           backgroundColor: "hsl(var(--accent-amber) / 0.22)",
+                          boxShadow: "0 0 12px -2px hsl(var(--accent-amber) / 0.55)",
                         }}
                       >
                         <Check

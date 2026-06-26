@@ -44,11 +44,11 @@ const sections: SectionData[] = [
       {
         number: "03",
         day: "Days 6\u20137",
-        headline: "They build 3 automations and graduate.",
+        headline: "They build 3 assistants and graduate.",
         description:
-          "Your employees build 3 real automations inside your business under our supervision. By the end of Day 7, the automations are live and your team has graduated.",
+          "Your employees build 3 real assistants inside your business under our supervision. By the end of Day 7, the assistants are live and your team has graduated.",
         deliverable:
-          "3 live automations and a trained team who can keep building on their own.",
+          "3 live assistants and a trained team who can keep building on their own.",
       },
     ],
   },
